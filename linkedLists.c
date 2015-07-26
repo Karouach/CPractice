@@ -17,6 +17,7 @@ struct node *addatbeg(struct node *start, int num);
 void addatend(struct node *start, int num);
 struct node *del(struct node *start, int num);
 void search(struct node *start, int num);
+void count(struct node *start);
 
 
 int main()
@@ -29,6 +30,7 @@ int main()
         printf("3. Add Node at The end\n\n");
         printf("4. Delete Node \n\n");
         printf("5. Search number  \n\n");
+        printf("6. Count Nodes  \n\n");
         printf("9. Exit\n\n");
         scanf("%d", &choice);
         switch (choice){
@@ -55,6 +57,10 @@ int main()
                 scanf("%d", &num);
                 search(start, num);
                 break;
+            case 6:
+                count(start);
+                break;
+
             case 9:
                 exit(1);
 
@@ -146,4 +152,14 @@ void search(struct node *start, int num){
     printf("Number not found in the list");
 
 
+}
+void count(struct node *start){
+    int count = 0;
+    struct node *p;
+    p= start;
+    while (p!= NULL){
+        p=p->link;
+        count++;
+    }
+    printf("Number ot nodes %d\n", count);
 }
