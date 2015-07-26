@@ -14,6 +14,7 @@ struct node {
 
 void display(struct node *start);
 struct node *addatbeg(struct node *start, int num);
+void addatend(struct node *start, int num);
 
 
 int main()
@@ -23,6 +24,7 @@ int main()
     while (1){
         printf("n1. Display\n\n");
         printf("2. Add Node at The begining\n\n");
+        printf("3. Add Node at The end\n\n");
         printf("9. Exit\n\n");
         scanf("%d", &choice);
         switch (choice){
@@ -31,9 +33,15 @@ int main()
                 break;
             case 2:
                 printf("Add the number to be inserted\n\n");
-                scanf("%3d", &num);
+                scanf("%d", &num);
                 start = addatbeg(start, num);
                 break;
+            case 3:
+                printf("Add the number to be inserted\n\n");
+                scanf("%3", &num);
+                addatend(start, num);
+                break;
+
 
             case 9:
                 exit(1);
@@ -68,5 +76,18 @@ struct node *addatbeg(struct node *start, int num){
     temp->link = start;
     start = temp;
     return start;
+
+}
+void addatend(struct node *start, int num){
+    struct node *temp, *p;
+    temp = (struct node *) malloc(sizeof(struct node));
+    temp ->info = num;
+    p = start;
+    while(p->link != NULL){
+        p = p->link;
+    }
+    p->link = temp;
+    temp->link= NULL;
+
 
 }
