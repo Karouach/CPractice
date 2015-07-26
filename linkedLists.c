@@ -16,6 +16,7 @@ void display(struct node *start);
 struct node *addatbeg(struct node *start, int num);
 void addatend(struct node *start, int num);
 struct node *del(struct node *start, int num);
+void search(struct node *start, int num);
 
 
 int main()
@@ -27,6 +28,7 @@ int main()
         printf("2. Add Node at The begining\n\n");
         printf("3. Add Node at The end\n\n");
         printf("4. Delete Node \n\n");
+        printf("5. Search number  \n\n");
         printf("9. Exit\n\n");
         scanf("%d", &choice);
         switch (choice){
@@ -48,7 +50,11 @@ int main()
                 scanf("%d", &num);
                 start = del(start, num);
                 break;
-
+            case 5:
+                printf("Enter the number to be searched: ");
+                scanf("%d", &num);
+                search(start, num);
+                break;
             case 9:
                 exit(1);
 
@@ -123,4 +129,20 @@ struct node *del(struct node *start, int num){
         p=p->link;
     }printf("The number is not presented in the list");
     return start;
+}
+void search(struct node *start, int num){
+    struct node*p;
+    int pos =1;
+    p = start;
+    while(p!=NULL){
+        if(p->info == num){
+            printf("%d Found at position %d", num, pos);
+            return;
+        }
+        p= p->link;
+        pos++;
+
+    }
+    printf("Number not found in the list");
+
 }
