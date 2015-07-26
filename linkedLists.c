@@ -18,12 +18,13 @@ void addatend(struct node *start, int num);
 struct node *del(struct node *start, int num);
 void search(struct node *start, int num);
 void count(struct node *start);
+void addafter(struct node* start, int num, int num2);
 
 
 int main()
 {
     struct node *start = NULL;
-    int choice, num;
+    int choice, num, num2;
     while (1){
         printf("1. Display\n\n");
         printf("2. Add Node at The begining\n\n");
@@ -31,6 +32,7 @@ int main()
         printf("4. Delete Node \n\n");
         printf("5. Search number  \n\n");
         printf("6. Count Nodes  \n\n");
+        printf("7. Add  Node After  \n\n");
         printf("9. Exit\n\n");
         scanf("%d", &choice);
         switch (choice){
@@ -60,6 +62,14 @@ int main()
             case 6:
                 count(start);
                 break;
+            case 7:
+                printf("Enter the number to be inserted: ");
+                scanf("%d", &num);
+                printf("Enter the number after which to insert: ");
+                scanf("%d", &num2);
+                addafter(start, num, num2);
+                break;
+
 
             case 9:
                 exit(1);
@@ -162,4 +172,20 @@ void count(struct node *start){
         count++;
     }
     printf("Number ot nodes %d\n", count);
+}
+void addafter(struct node* start, int num, int num2) {
+    struct node *temp, *p;
+    p = start;
+    while (p != NULL) {
+        if (p->info == num2) {
+            temp = (struct node *) malloc(sizeof(struct node));
+            temp->info = num;
+            temp->link = p->link;
+            p->link = temp;
+            return;
+        }
+        p = p->link;
+    }
+    printf("the numberdoes not exist");
+
 }
