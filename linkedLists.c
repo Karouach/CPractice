@@ -145,4 +145,5 @@ void search(struct node *start, int num){
     }
     printf("Number not found in the list");
 
+
 }
