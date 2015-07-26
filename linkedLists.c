@@ -15,6 +15,7 @@ struct node {
 void display(struct node *start);
 struct node *addatbeg(struct node *start, int num);
 void addatend(struct node *start, int num);
+struct node *del(struct node *start, int num);
 
 
 int main()
@@ -22,9 +23,10 @@ int main()
     struct node *start = NULL;
     int choice, num;
     while (1){
-        printf("n1. Display\n\n");
+        printf("1. Display\n\n");
         printf("2. Add Node at The begining\n\n");
         printf("3. Add Node at The end\n\n");
+        printf("4. Delete Node \n\n");
         printf("9. Exit\n\n");
         scanf("%d", &choice);
         switch (choice){
@@ -38,10 +40,14 @@ int main()
                 break;
             case 3:
                 printf("Add the number to be inserted\n\n");
-                scanf("%3", &num);
+                scanf("%d", &num);
                 addatend(start, num);
                 break;
-
+            case 4:
+                printf("Add the number to be deleted\n\n");
+                scanf("%d", &num);
+                start = del(start, num);
+                break;
 
             case 9:
                 exit(1);
@@ -90,4 +96,31 @@ void addatend(struct node *start, int num){
     temp->link= NULL;
 
 
+}
+struct node *del(struct node *start, int num){
+    struct node *temp, *p;
+    if(start == NULL){
+        printf("Linked list in Empty");
+        return start;
+    }
+    if(start ->info == num){
+        temp = start;
+        start = start->link;
+        free(temp);
+        return start;
+
+    }
+
+    p = start;
+    while (p->link != NULL){
+        if(p->link->info == num){
+            temp = p ->link;
+            p->link = temp->link;
+            free(temp);
+            return start;
+
+        }
+        p=p->link;
+    }printf("The number is not presented in the list");
+    return start;
 }
