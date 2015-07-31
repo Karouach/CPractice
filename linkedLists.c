@@ -19,6 +19,7 @@ struct node *del(struct node *start, int num);
 void search(struct node *start, int num);
 void count(struct node *start);
 void addafter(struct node* start, int num, int num2);
+struct node *addbefore(struct node *start, int num, int num2);
 
 
 int main()
@@ -33,6 +34,7 @@ int main()
         printf("5. Search number  \n\n");
         printf("6. Count Nodes  \n\n");
         printf("7. Add  Node After  \n\n");
+        printf("8. Add  Node Before  \n\n");
         printf("9. Exit\n\n");
         scanf("%d", &choice);
         switch (choice){
@@ -69,6 +71,14 @@ int main()
                 scanf("%d", &num2);
                 addafter(start, num, num2);
                 break;
+            case 8:
+                printf("Enter the number to be inserted: ");
+                scanf("%d", &num);
+                printf("Enter the number before which to insert: ");
+                scanf("%d", &num2);
+                start = addbefore(start, num, num2);
+                break;
+
 
 
             case 9:
@@ -187,5 +197,29 @@ void addafter(struct node* start, int num, int num2) {
         p = p->link;
     }
     printf("the numberdoes not exist");
+
+}
+struct node *addbefore(struct node *start, int num, int num2){
+    struct node *temp, *p;
+    if(start->info == num2){
+        temp = (struct node *)malloc(sizeof(struct node));
+        temp->info = num;
+        temp->link=start;
+        start = temp;
+        return start;
+
+    }
+    p =start;
+    while(p->link != NULL){
+        if(p->link->info ==num2){
+            temp = (struct node *)malloc(sizeof(struct node));
+            temp->info = num;
+            temp->link=p->link;
+            p->link = temp;
+            return start;
+
+        }p=p->link;
+    }printf("%d Number is not in the list", num2);
+    return start;
 
 }
