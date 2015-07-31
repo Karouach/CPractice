@@ -20,6 +20,7 @@ void search(struct node *start, int num);
 void count(struct node *start);
 void addafter(struct node* start, int num, int num2);
 struct node *addbefore(struct node *start, int num, int num2);
+struct node *revere(struct node *start);
 
 
 int main()
@@ -35,7 +36,8 @@ int main()
         printf("6. Count Nodes  \n\n");
         printf("7. Add  Node After  \n\n");
         printf("8. Add  Node Before  \n\n");
-        printf("9. Exit\n\n");
+        printf("9. Reverse List  \n\n");
+        printf("10. Exit\n\n");
         scanf("%d", &choice);
         switch (choice){
             case 1:
@@ -78,10 +80,12 @@ int main()
                 scanf("%d", &num2);
                 start = addbefore(start, num, num2);
                 break;
-
-
-
             case 9:
+                start = revere(start);
+                break;
+
+
+            case 10:
                 exit(1);
 
             default:
@@ -222,4 +226,18 @@ struct node *addbefore(struct node *start, int num, int num2){
     }printf("%d Number is not in the list", num2);
     return start;
 
+}
+struct node *revere(struct node *start){
+    struct node *previous, *ptr, *next;
+    previous = NULL;
+    ptr = start;
+
+    while (ptr !=NULL){
+        next = ptr->link;
+        ptr->link = previous;
+        previous = ptr;
+        ptr = next;
+    }
+    start = previous;
+    return start;
 }
